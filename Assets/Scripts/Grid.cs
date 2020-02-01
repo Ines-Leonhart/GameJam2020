@@ -105,4 +105,16 @@ public class Grid : MonoBehaviour
             plant.transform.position = position;
         }
     }
+
+    public float getSizeZ()
+    {
+        var size = cellPrefab.GetComponent<Renderer>().bounds.size;
+        return size.z * columns;
+    }
+
+    public float getSizeX()
+    {
+        var size = cellPrefab.GetComponent<Renderer>().bounds.size;
+        return size.x * rows;
+    }
 }
