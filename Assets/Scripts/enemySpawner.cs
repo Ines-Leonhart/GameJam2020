@@ -24,6 +24,11 @@ public class enemySpawner : MonoBehaviour
 
     void Update()
     {
+        if (Singleton.Get<Game>().CurrentState != Game.State.Play)
+        {
+            return;
+        }
+
         if (Time.realtimeSinceStartup - spawnTimestamp >= period
                 && grid.GetNumberPlantsOnLine(transform.position) > 0)
         {
