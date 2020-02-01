@@ -229,7 +229,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minDistanceForSwipe: 20
-  cellPrefab: {fileID: 0}
+  cellPrefab: {fileID: 1857940511978724787, guid: ae90b5b79997f43939e66efa8deb4db9,
+    type: 3}
 --- !u!1 &282145764
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,28 +7,33 @@ public class enemySpawner : MonoBehaviour
 
     public GameObject enemy1; //Enemy1 prefab
 
-    private float nextActionTime;
-    public float period; //Timer variables
+    float period; //Timer variables
+    float spawnTimestamp;
+
+    Grid grid;
 
     void Start()
     {
         // TODO: determine period and action time based on level difficulty
+        // TODO: also start this up once the player waters the first plant
         period = Random.Range(3f, 10f);
-        nextActionTime = Random.Range(1f, period);
+        spawnTimestamp = Time.realtimeSinceStartup;
+
+        grid = FindObjectOfType<Grid>();
     }
 
     void Update()
     {
-        // TODO: check if there's a plant in this row/column
-        if (Time.time > nextActionTime)
+        if (Time.realtimeSinceStartup - spawnTimestamp >= period
+                && grid.GetNumberPlantsOnLine(transform.position) > 0)
         {
-            nextActionTime += period;
-
             GameObject my_enemy1 = Instantiate(enemy1, transform.position, transform.rotation);
             enemyMovement my_enemy1_mov = my_enemy1.GetComponent<enemyMovement>();
-            
+
             my_enemy1_mov.xDir = xDir;
             my_enemy1_mov.zDir = zDir;
+
+            spawnTimestamp = Time.realtimeSinceStartup;
         }
     }
 }

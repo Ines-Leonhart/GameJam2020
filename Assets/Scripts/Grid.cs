@@ -96,6 +96,7 @@ public class Grid : MonoBehaviour
         {
             var cellGO = cells[t.Item1][t.Item2];
             var plant = Instantiate(plantPrefab, plantsContainer.transform);
+            cellGO.GetComponent<cellScript>().Plant = plant.GetComponent<Plant>();
 
             // var plantSize = plant.GetComponent<MeshRenderer>().bounds.size;
 
@@ -116,5 +117,59 @@ public class Grid : MonoBehaviour
     {
         var size = cellPrefab.GetComponent<Renderer>().bounds.size;
         return size.x * rows;
+    }
+
+    public int GetNumberPlantsOnLine(Vector3 position)
+    {
+        var num = 0;
+
+        // We need to find the right column
+        if (position.z < cells[0][0].transform.position.z)
+        {
+            var column = 0;
+
+            // We only need to check row 0
+            for (var i = 0; i < cells.Count; ++i)
+            {
+                if (position.x == cells[i][0].transform.position.x)
+                {
+                    column = i;
+                    break;
+                }
+            }
+
+            for (var i = 0; i < cells[column].Count; ++i)
+            {
+                if (cells[column][i].GetComponent<cellScript>().Plant != null)
+                {
+                    ++num;
+                }
+            }
+        }
+        // We need to find the right row
+        else
+        {
+            var row = 0;
+
+            // We only need to check column 0
+            for (var i = 0; i < cells[0].Count; ++i)
+            {
+                if (position.z == cells[0][i].transform.position.z)
+                {
+                    row = i;
+                    break;
+                }
+            }
+
+            for (var i = 0; i < cells.Count; ++i)
+            {
+                if (cells[i][row].GetComponent<cellScript>().Plant != null)
+                {
+                    ++num;
+                }
+            }
+        }
+
+        return num;
     }
 }
