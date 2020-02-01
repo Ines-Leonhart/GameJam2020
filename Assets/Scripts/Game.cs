@@ -3,7 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class Game : Singleton
 {
-	GameUI GameUI
+
+    GameUI GameUI
 	{
 		get
 		{
@@ -49,6 +50,41 @@ public class Game : Singleton
 		SceneManager.LoadScene(levelScene);
 
         // TODO: instantiate stuff
+    }
+
+    public void playerToggleTools(string tool)
+    {
+        if(GameObject.Find("Player") != null)
+        {
+            if (tool == "watercan")
+            {
+                Debug.Log("Player changed to " + tool);
+            }
+            else if (tool == "pulverizer")
+            {
+                Debug.Log("Player changed to " + tool);
+            }
+        }
+    }
+
+    public void playerUseTool(string tool)
+    {
+        if (GameObject.Find("Player") != null)
+        {
+            if (GameObject.Find("Player") != null)
+            {
+                GameObject player = GameObject.Find("Player");
+                if (tool == "watercan")
+                {
+                    Debug.Log("Player used " + tool + " on cell " + player.GetComponent<Player>().currentCell.GetInstanceID());
+                    
+                }
+                else if (tool == "pulverizer")
+                {
+                    Debug.Log("Player used " + tool + " on cell " + player.GetComponent<Player>().currentCell.GetInstanceID());
+                }
+            }
+        }
     }
 
     private void Update()
