@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class enemyMovement : MonoBehaviour
 {
+    [SerializeField] float speed;
+
     public int xDir;
     public int zDir; //Movement direction variables
 
@@ -18,12 +20,11 @@ public class enemyMovement : MonoBehaviour
 
         //Get a component reference to this object's Rigidbody2D
         rb = GetComponent<Rigidbody>();
-        rb.velocity = new Vector3(xDir, 0, zDir);
     }
 
     protected void Move(int xDir, int zDir)
     {
-        rb.MovePosition(transform.position + new Vector3(xDir, 0, zDir) * Time.fixedDeltaTime);
+        rb.MovePosition(transform.position + new Vector3(xDir, 0, zDir) * Time.fixedDeltaTime * speed);
     }
 
     private void OnTriggerExit(Collider other)

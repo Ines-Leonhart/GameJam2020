@@ -8,7 +8,6 @@ public class Grid : MonoBehaviour
     [SerializeField] GameObject enemySpawner;
     [SerializeField] float spawnerOffset;
 
-    // Start is called before the first frame update
     void Start()
     {
         var size = cellPrefab.GetComponent<Renderer>().bounds.size;
@@ -36,6 +35,12 @@ public class Grid : MonoBehaviour
                 }
             }
         }
+
+        var collider = gameObject.AddComponent<BoxCollider>();
+        collider.isTrigger = true;
+
+        var colliderSize = new Vector3(size.x * columns, size.y, size.z * rows);
+        collider.size = colliderSize;
     }
 
     void InstantiateSpawner(Vector3 initialPosition, Vector3 offset, Vector3 direction)

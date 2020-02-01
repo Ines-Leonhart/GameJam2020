@@ -7,12 +7,19 @@ public class enemySpawner : MonoBehaviour
 
     public GameObject enemy1; //Enemy1 prefab
 
-    private float nextActionTime = 1.0f;
-    public float period = 3f; //Timer variables
+    private float nextActionTime;
+    public float period; //Timer variables
 
-    // Update is called once per frame
+    void Start()
+    {
+        // TODO: determine period and action time based on level difficulty
+        period = Random.Range(3f, 10f);
+        nextActionTime = Random.Range(0.1f, period);
+    }
+
     void Update()
     {
+        // TODO: check if there's a plant in this row/column
         if (Time.time > nextActionTime)
         {
             nextActionTime += period;
