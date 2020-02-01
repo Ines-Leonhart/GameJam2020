@@ -45,10 +45,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellPrefab: {fileID: 1857940511978724787, guid: ae90b5b79997f43939e66efa8deb4db9,
     type: 3}
-  rows: 3
-  columns: 3
+  rows: 5
+  columns: 5
   enemySpawner: {fileID: 8407769336967994666, guid: 835bd2b3b01ba4fda994101a51f2e250,
     type: 3}
   spawnerOffset: 10
-  plantPrefab: {fileID: 6219257580511329920, guid: 23896dc295ad04ba99f16b72e14edc73,
+  plantPrefab: {fileID: 6682338947546607784, guid: 54f872d00e65d964195010f75eb63ba5,
     type: 3}
