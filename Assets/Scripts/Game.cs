@@ -24,6 +24,8 @@ public class Game : Singleton
     public State CurrentState { get; set; }
 
 	bool mainSceneLoaded;
+    public bool gameStarted { get; set; }
+    bool gameStartedDone;
     float levelStartTimestamp;
     public Player player { get; set; }
 
@@ -42,7 +44,9 @@ public class Game : Singleton
 
 	public void StartGame()
 	{
-		mainSceneLoaded = false;
+        mainSceneLoaded = false;
+        gameStarted = false;
+        gameStartedDone = false;
 		CurrentState = State.Play;
 		InitialiseLevel();
         levelStartTimestamp = 0;
@@ -97,20 +101,44 @@ public class Game : Singleton
     {
 		if (CurrentState == State.Play && mainSceneLoaded)
 		{
-			var numPlantsAlive = FindObjectsOfType<Plant>().Length;
+            var plants = GameObject.FindObjectsOfType<Plant>();
+            if (plants != null)
+            {
+                for (int i = 0; i < plants.Length; i++)
+                {
+                    if (plants[i].CurrentState == Plant.State.Grown)
+                    {
+                        gameStarted = true;
+                    }
+                }
+            }
+
+            if (gameStarted && !gameStartedDone)
+            {
+                Debug.Log(levelStartTimestamp);
+                levelStartTimestamp = Time.realtimeSinceStartup;
+                gameStartedDone = true;
+
+            }
+
+            var numPlantsAlive = FindObjectsOfType<Plant>().Length;
 			if (numPlantsAlive == 0)
 			{
                 EndLevel(false);
 			}
 
-            if (Time.realtimeSinceStartup - levelStartTimestamp > levelDuration)
+            if(levelStartTimestamp != 0)
             {
-                EndLevel(true);
+                if (Time.realtimeSinceStartup - levelStartTimestamp > levelDuration)
+                {
+                    EndLevel(true);
+                }
+                else
+                {
+                    GameUI.UpdateCountdown(levelDuration - (Time.realtimeSinceStartup - levelStartTimestamp));
+                }
             }
-            else
-            {
-                GameUI.UpdateCountdown(levelDuration - (Time.realtimeSinceStartup - levelStartTimestamp));
-            }
+                
 		}
     }
 
@@ -118,8 +146,7 @@ public class Game : Singleton
 	{
 		if (scene.name.Equals(levelScene))
 		{
-			mainSceneLoaded = true;
-            levelStartTimestamp = Time.realtimeSinceStartup;
+                mainSceneLoaded = true;
             player = GameObject.FindObjectOfType<Player>();
             GameUI.onLevelStarted();
         }

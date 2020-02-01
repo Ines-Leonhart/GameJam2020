@@ -12,11 +12,19 @@ public class enemySpawner : MonoBehaviour
 
     Grid grid;
 
+    Game Game
+    {
+        get
+        {
+            return Singleton.Get<Game>();
+        }
+    }
+
     void Start()
     {
         // TODO: determine period and action time based on level difficulty
         // TODO: also start this up once the player waters the first plant
-        period = Random.Range(3f, 10f);
+        period = Random.Range(6f, 10f);
         spawnTimestamp = Time.realtimeSinceStartup;
 
         grid = FindObjectOfType<Grid>();
@@ -24,13 +32,16 @@ public class enemySpawner : MonoBehaviour
 
     void Update()
     {
-        if (Singleton.Get<Game>().CurrentState != Game.State.Play)
+        if (Game.CurrentState != Game.State.Play)
         {
             return;
         }
-
+        if (!Game.gameStarted)
+        {
+            return;
+        }
         if (Time.realtimeSinceStartup - spawnTimestamp >= period
-                && grid.GetNumberPlantsOnLine(transform.position) > 0)
+            && grid.GetNumberPlantsOnLine(transform.position) > 0)
         {
             GameObject my_enemy1 = Instantiate(enemy1, transform.position, transform.rotation);
             enemyMovement my_enemy1_mov = my_enemy1.GetComponent<enemyMovement>();

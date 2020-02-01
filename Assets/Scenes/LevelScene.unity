@@ -550,5 +550,15 @@ PrefabInstance:
       propertyPath: columns
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8425803652933881887, guid: 3f5949f7e5424491ea0ea200fabb43a0,
+        type: 3}
+      propertyPath: minRange
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8425803652933881887, guid: 3f5949f7e5424491ea0ea200fabb43a0,
+        type: 3}
+      propertyPath: maxRange
+      value: 120
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f5949f7e5424491ea0ea200fabb43a0, type: 3}
