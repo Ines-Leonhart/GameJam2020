@@ -20,6 +20,8 @@ public class enemyMovement : MonoBehaviour
 
         //Get a component reference to this object's Rigidbody2D
         rb = GetComponent<Rigidbody>();
+
+        transform.LookAt(transform.position + new Vector3(xDir, 0, zDir), Vector3.up);
     }
 
     protected void Move(int xDir, int zDir)
