@@ -95,4 +95,4 @@ MonoBehaviour:
   xDir: 0
   zDir: 1
   enemy1: {fileID: 6383406247404906947, guid: 964edab54cf5ffe4db3210d2a2e26389, type: 3}
-  period: 3
+  maxEnemies: 3

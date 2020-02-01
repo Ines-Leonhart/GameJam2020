@@ -28,6 +28,9 @@ public class Plant : MonoBehaviour
         grownPlant.SetActive(false);
         infectionElements.SetActive(false);
         timeLeft = infectionTime;
+        var rotation = transform.rotation;
+        rotation.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
+        transform.rotation = rotation;
     }
 
     public void Water()
