@@ -25,4 +25,16 @@ public class Grid : MonoBehaviour
             }
         }
     }
+
+    public float getSizeZ()
+    {
+        var size = cellPrefab.GetComponent<Renderer>().bounds.size;
+        return size.z * columns;
+    }
+
+    public float getSizeX()
+    {
+        var size = cellPrefab.GetComponent<Renderer>().bounds.size;
+        return size.x * rows;
+    }
 }
