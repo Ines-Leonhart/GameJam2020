@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class enemySpawner : MonoBehaviour
 {
@@ -9,24 +7,25 @@ public class enemySpawner : MonoBehaviour
 
     public GameObject enemy1; //Enemy1 prefab
 
-    private float nextActionTime = 0.0f;
-    public float period = 3f; //Timer variables
+    private float nextActionTime;
+    public float period; //Timer variables
 
-    // Start is called before the first frame update
     void Start()
     {
-
+        // TODO: determine period and action time based on level difficulty
+        period = Random.Range(3f, 10f);
+        nextActionTime = Random.Range(0.1f, period);
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // TODO: check if there's a plant in this row/column
         if (Time.time > nextActionTime)
         {
             nextActionTime += period;
-            GameObject my_enemy1 = (GameObject)Instantiate(enemy1, transform.position, transform.rotation);
 
-            enemyMovement my_enemy1_mov = enemy1.GetComponent<enemyMovement>();
+            GameObject my_enemy1 = Instantiate(enemy1, transform.position, transform.rotation);
+            enemyMovement my_enemy1_mov = my_enemy1.GetComponent<enemyMovement>();
             
             my_enemy1_mov.xDir = xDir;
             my_enemy1_mov.zDir = zDir;
