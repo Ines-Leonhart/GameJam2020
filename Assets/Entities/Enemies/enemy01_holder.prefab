@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 798583939885047953}
-  - component: {fileID: -6699012875666505611}
   - component: {fileID: 1377306532880233435}
   - component: {fileID: 5001072123718389762}
+  - component: {fileID: 6692789801849168704}
   m_Layer: 8
   m_Name: enemy01_holder
   m_TagString: Untagged
@@ -35,19 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &-6699012875666505611
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6383406247404906947}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!54 &1377306532880233435
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -80,6 +67,20 @@ MonoBehaviour:
   speed: 1
   xDir: 0
   zDir: 1
+--- !u!136 &6692789801849168704
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6383406247404906947}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.22251809
+  m_Height: 0.75122285
+  m_Direction: 1
+  m_Center: {x: -0.0042539537, y: 0.3404411, z: -0.038583577}
 --- !u!1001 &707433616993305507
 PrefabInstance:
   m_ObjectHideFlags: 0
