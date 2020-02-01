@@ -30,7 +30,7 @@ public class cellScript : MonoBehaviour
 
     private void Update()
     {
-        if (Game.gameStarted)
+        if (Game.gameStarted && Game.CurrentState == Game.State.Play)
         {
             if(Plant != null)
             {

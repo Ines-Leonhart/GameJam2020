@@ -23,7 +23,6 @@ public class enemySpawner : MonoBehaviour
     void Start()
     {
         // TODO: determine period and action time based on level difficulty
-        // TODO: also start this up once the player waters the first plant
         period = Random.Range(6f, 10f);
         spawnTimestamp = Time.realtimeSinceStartup;
 
@@ -47,6 +46,7 @@ public class enemySpawner : MonoBehaviour
             my_enemy1_mov.zDir = zDir;
 
             spawnTimestamp = Time.realtimeSinceStartup;
+            period = Random.Range(6f, 10f);
         }
     }
 }

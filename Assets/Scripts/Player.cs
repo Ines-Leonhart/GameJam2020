@@ -145,7 +145,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    target = checkGround(transform.position + new Vector3(cellSize.x, 0, 0));
+                    target = checkGround(center.position + new Vector3(cellSize.x, 0, 0));
                     if (target != null)
                     {
                         transform.position = new Vector3(target.position.x, transform.position.y, transform.position.z);

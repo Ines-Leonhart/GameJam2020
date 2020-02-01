@@ -16,8 +16,10 @@ public class Plant : MonoBehaviour
     [SerializeField] GameObject seed;
     [SerializeField] GameObject grownPlant;
     [SerializeField] GameObject infectionElements;
+    [SerializeField] float infectionTime;
 
     public State CurrentState { get; private set; }
+    private float timeLeft;
 
     void Start()
     {
@@ -25,6 +27,7 @@ public class Plant : MonoBehaviour
         seed.SetActive(true);
         grownPlant.SetActive(false);
         infectionElements.SetActive(false);
+        timeLeft = infectionTime;
     }
 
     public void Water()
@@ -45,6 +48,8 @@ public class Plant : MonoBehaviour
             CurrentState = State.Grown;
 
             infectionElements.SetActive(false);
+
+            timeLeft = infectionTime;
         }
     }
 
@@ -59,6 +64,21 @@ public class Plant : MonoBehaviour
         {
             CurrentState = State.Infected;
             infectionElements.SetActive(true);
+        }else if (CurrentState == State.Infected)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        if(CurrentState == State.Infected)
+        {
+            timeLeft -= Time.deltaTime;
+            if (timeLeft < 0)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 }
