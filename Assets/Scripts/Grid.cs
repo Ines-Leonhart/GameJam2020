@@ -6,6 +6,8 @@ public class Grid : MonoBehaviour
     [SerializeField] GameObject cellPrefab;
     [SerializeField] int rows;
     [SerializeField] int columns;
+    [SerializeField] float minRange;
+    [SerializeField] float maxRange;
     [SerializeField] GameObject enemySpawner;
     [SerializeField] float spawnerOffset;
     [SerializeField] GameObject plantPrefab;
@@ -13,6 +15,14 @@ public class Grid : MonoBehaviour
     [SerializeField] GameObject plantsContainer;
 
     List<List<GameObject>> cells = new List<List<GameObject>>();
+
+    Game Game
+    {
+        get
+        {
+            return Singleton.Get<Game>();
+        }
+    }
 
     void Start()
     {
@@ -25,6 +35,8 @@ public class Grid : MonoBehaviour
             for (int j = -rows / 2; j <= rows / 2; ++j)
             {
                 var go = Instantiate(cellPrefab, cellsContainer.transform);
+                go.GetComponent<cellScript>().spawnTimeRange = (minRange, maxRange);
+                go.GetComponent<cellScript>().plantPrefab = plantPrefab;
                 cells[x].Add(go);
 
                 var position = go.transform.position;

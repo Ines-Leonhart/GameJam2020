@@ -31,6 +31,11 @@ public class Player : MonoBehaviour
     
     private void Update()
     {
+        if(Singleton.Get<Game>().CurrentState != Game.State.Play)
+        {
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             fingerDownPosition = Input.mousePosition;
