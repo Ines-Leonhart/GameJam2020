@@ -23,7 +23,9 @@ public class Game : Singleton
 
     public State CurrentState { get; set; }
 
-	bool mainSceneLoaded;
+    public Player player { get; set; }
+
+    bool mainSceneLoaded;
 
 	protected override void Awake()
 	{
@@ -52,38 +54,19 @@ public class Game : Singleton
         // TODO: instantiate stuff
     }
 
-    public void playerToggleTools(string tool)
+    public void playerToggleTools()
     {
         if(GameObject.Find("Player") != null)
         {
-            if (tool == "watercan")
-            {
-                Debug.Log("Player changed to " + tool);
-            }
-            else if (tool == "pulverizer")
-            {
-                Debug.Log("Player changed to " + tool);
-            }
+            player.ToggleMyTools();
         }
     }
 
-    public void playerUseTool(string tool)
+    public void playerUseTool()
     {
         if (GameObject.Find("Player") != null)
         {
-            if (GameObject.Find("Player") != null)
-            {
-                GameObject player = GameObject.Find("Player");
-                if (tool == "watercan")
-                {
-                    Debug.Log("Player used " + tool + " on cell " + player.GetComponent<Player>().currentCell.GetInstanceID());
-                    
-                }
-                else if (tool == "pulverizer")
-                {
-                    Debug.Log("Player used " + tool + " on cell " + player.GetComponent<Player>().currentCell.GetInstanceID());
-                }
-            }
+            player.UseMyTools();
         }
     }
 
@@ -105,6 +88,8 @@ public class Game : Singleton
 		if (scene.name.Equals(levelScene))
 		{
 			mainSceneLoaded = true;
+            player = GameObject.FindObjectOfType<Player>();
+            GameUI.onLevelStarted();
         }
 	}
 }
