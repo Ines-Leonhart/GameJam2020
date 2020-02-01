@@ -9,11 +9,15 @@ public class Player : MonoBehaviour
     Vector3 fingerUpPosition;
     Vector3 fingerDownPosition;
 
+    public GameObject currentCell { get; set; }
+
     private Rigidbody rb;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        currentCell = checkGround(transform.position).gameObject;
     }
     
     private void Update()
@@ -62,6 +66,7 @@ public class Player : MonoBehaviour
                     if (target != null)
                     { 
                         transform.position = new Vector3(transform.position.x, transform.position.y, target.position.z);
+                        currentCell = target.gameObject;
                     }
                 }
                 else
@@ -70,6 +75,7 @@ public class Player : MonoBehaviour
                     if (target != null)
                     {
                         transform.position = new Vector3(transform.position.x, transform.position.y, target.position.z);
+                        currentCell = target.gameObject;
                     }
                 }
             }
@@ -81,6 +87,7 @@ public class Player : MonoBehaviour
                     if (target != null)
                     {
                         transform.position = new Vector3(target.position.x, transform.position.y, transform.position.z);
+                        currentCell = target.gameObject;
                     }
                 }
                 else
@@ -89,6 +96,7 @@ public class Player : MonoBehaviour
                     if (target != null)
                     {
                         transform.position = new Vector3(target.position.x, transform.position.y, transform.position.z);
+                        currentCell = target.gameObject;
                     }
                 }
             }

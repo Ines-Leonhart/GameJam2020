@@ -73,13 +73,15 @@ public class Game : Singleton
         {
             if (GameObject.Find("Player") != null)
             {
+                GameObject player = GameObject.Find("Player");
                 if (tool == "watercan")
                 {
-                    Debug.Log("Player used " + tool);
+                    Debug.Log("Player used " + tool + " on cell " + player.GetComponent<Player>().currentCell.GetInstanceID());
+                    
                 }
                 else if (tool == "pulverizer")
                 {
-                    Debug.Log("Player used " + tool);
+                    Debug.Log("Player used " + tool + " on cell " + player.GetComponent<Player>().currentCell.GetInstanceID());
                 }
             }
         }
