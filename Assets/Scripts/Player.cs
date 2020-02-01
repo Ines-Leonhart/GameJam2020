@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using DG.Tweening;
 
 public class Player : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
-
+    
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -57,9 +58,6 @@ public class Player : MonoBehaviour
             {
                 if (fingerDownPosition.y - fingerUpPosition.y > 0)
                 {
-                    Debug.Log("Swipe down");
-                    Debug.DrawRay(transform.position + new Vector3(0, 0, -cellSize.z), Vector3.down, Color.red, 3);
-                    Debug.Log(transform.position);
                     target = checkGround(transform.position + new Vector3(0, 0, -cellSize.z));
                     if (target != null)
                     { 
@@ -68,9 +66,6 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Swipe up");
-                    Debug.DrawRay(transform.position + new Vector3(0, 0, cellSize.z), Vector3.down, Color.red, 3);
-                    Debug.Log(transform.position);
                     target = checkGround(transform.position + new Vector3(0, 0, cellSize.z));
                     if (target != null)
                     {
@@ -82,9 +77,6 @@ public class Player : MonoBehaviour
             {
                 if (fingerDownPosition.x - fingerUpPosition.x > 0)
                 {
-                    Debug.Log("Swipe left");
-                    Debug.DrawRay(transform.position + new Vector3(-cellSize.x, 0, 0), Vector3.down, Color.red, 3);
-                    Debug.Log(transform.position);
                     target = checkGround(transform.position + new Vector3(-cellSize.x, 0, 0));
                     if (target != null)
                     {
@@ -93,15 +85,40 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Swipe right");
-                    Debug.DrawRay(transform.position + new Vector3(cellSize.x, 0, 0), Vector3.down, Color.red, 3);
-                    Debug.Log(transform.position);
                     target = checkGround(transform.position + new Vector3(cellSize.x, 0, 0));
                     if (target != null)
                     {
                         transform.position = new Vector3(target.position.x, transform.position.y, transform.position.z);
                     }
                 }
+            }
+        }
+        else
+        {
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z));
+            var iterable = Physics.RaycastAll(ray);
+            System.Collections.Generic.List<RaycastHit> list = new System.Collections.Generic.List<RaycastHit>();
+
+            for (int i = 0; i < iterable.Length; i++)
+            {
+                if(iterable[i].transform.tag == "cell")
+                {
+                    list.Add(iterable[i]);
+                }
+            }
+            if(list.Count > 0)
+            {
+                RaycastHit chosen = new RaycastHit();
+                chosen = list[0];
+                list.ForEach(delegate (RaycastHit element)
+                {
+                    if (Vector3.Distance(chosen.point, fingerDownPosition) > Vector3.Distance(element.point, fingerDownPosition))
+                    {
+                        chosen = element;
+                    }
+                });
+                var originalColor = chosen.transform.gameObject.GetComponent<Renderer>().material.color;
+                chosen.transform.gameObject.GetComponent<Renderer>().material.DOColor(new Color(0, 255, 0, 0.2f), 0.1f).From();
             }
         }
     }
