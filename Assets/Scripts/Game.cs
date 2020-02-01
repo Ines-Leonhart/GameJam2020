@@ -38,4 +38,10 @@ public class Game : Singleton
 
         // TODO: instantiate stuff
     }
+
+    private void Update()
+    {
+		var numPlantsAlive = FindObjectsOfType<Plant>().Length;
+		Debug.Log("Num plants: " + numPlantsAlive);
+    }
 }
