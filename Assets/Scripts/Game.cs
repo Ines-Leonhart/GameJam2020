@@ -3,6 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class Game : Singleton
 {
+	GameUI GameUI
+	{
+		get
+		{
+			return Singleton.Get<GameUI>();
+		}
+	}
+
 	public enum State
 	{
         Frontend,
@@ -14,6 +22,8 @@ public class Game : Singleton
 
     public State CurrentState { get; set; }
 
+	bool mainSceneLoaded;
+
 	protected override void Awake()
 	{
 		GameObject.DontDestroyOnLoad(gameObject);
@@ -23,11 +33,13 @@ public class Game : Singleton
 
     void Start()
     {
-		CurrentState = State.Frontend;    
-    }
+		CurrentState = State.Frontend;
+		SceneManager.sceneLoaded += OnSceneLoaded;
+	}
 
 	public void StartGame()
 	{
+		mainSceneLoaded = false;
 		CurrentState = State.Play;
 		InitialiseLevel();
     }
@@ -38,4 +50,25 @@ public class Game : Singleton
 
         // TODO: instantiate stuff
     }
+
+    private void Update()
+    {
+		if (CurrentState == State.Play && mainSceneLoaded)
+		{
+			var numPlantsAlive = FindObjectsOfType<Plant>().Length;
+			if (numPlantsAlive == 0)
+			{
+				CurrentState = State.LevelEnd;
+				GameUI.OnLevelEnd(false);
+			}
+		}
+    }
+
+	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+	{
+		if (scene.name.Equals(levelScene))
+		{
+			mainSceneLoaded = true;
+        }
+	}
 }

@@ -14,7 +14,7 @@ public class enemySpawner : MonoBehaviour
     {
         // TODO: determine period and action time based on level difficulty
         period = Random.Range(3f, 10f);
-        nextActionTime = Random.Range(0.1f, period);
+        nextActionTime = Random.Range(1f, period);
     }
 
     void Update()
