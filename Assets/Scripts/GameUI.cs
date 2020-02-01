@@ -12,6 +12,8 @@ public class GameUI : Singleton
     [SerializeField] Button toolButton;
     [SerializeField] Button actionButton;
 
+    [SerializeField] Text countdown;
+
     [SerializeField] Text levelEndText;
 
     Game Game
@@ -84,5 +86,11 @@ public class GameUI : Singleton
     void useTool()
     {
         Game.playerUseTool();
+    }
+
+    public void UpdateCountdown(float time)
+    {
+        var t = System.TimeSpan.FromSeconds(time);
+        countdown.text = string.Format("{0:00}:{1:00}", t.Minutes, t.Seconds);
     }
 }

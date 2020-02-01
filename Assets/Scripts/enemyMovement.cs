@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class enemyMovement : MonoBehaviour
 {
+    [SerializeField] GameObject vfxPrefab;
     [SerializeField] float speed;
 
     public int xDir;
@@ -51,5 +50,17 @@ public class enemyMovement : MonoBehaviour
             plant.Attack();
             Destroy(this.gameObject);
         }
+    }
+
+    public void Kill()
+    {
+        // TODO: vfx
+        if (vfxPrefab != null)
+        {
+            var vfx = Instantiate(vfxPrefab);
+            vfx.transform.position = transform.position;
+        }
+
+        Destroy(this.gameObject);
     }
 }

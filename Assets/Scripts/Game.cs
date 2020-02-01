@@ -3,7 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class Game : Singleton
 {
-
     GameUI GameUI
 	{
 		get
@@ -20,12 +19,13 @@ public class Game : Singleton
 	}
 
 	[SerializeField] string levelScene;
+    [SerializeField] float levelDuration;
 
     public State CurrentState { get; set; }
 
+	bool mainSceneLoaded;
+    float levelStartTimestamp;
     public Player player { get; set; }
-
-    bool mainSceneLoaded;
 
 	protected override void Awake()
 	{
@@ -45,6 +45,7 @@ public class Game : Singleton
 		mainSceneLoaded = false;
 		CurrentState = State.Play;
 		InitialiseLevel();
+        levelStartTimestamp = 0;
     }
 
     public void QuitGame()
@@ -57,6 +58,23 @@ public class Game : Singleton
 		SceneManager.LoadScene(levelScene);
 
         // TODO: instantiate stuff
+    }
+
+    void EndLevel(bool win)
+    {
+        CurrentState = State.LevelEnd;
+        GameUI.OnLevelEnd(win);
+        levelStartTimestamp = 0;
+
+        // Explode all enemies!
+        if (win)
+        {
+            var enemies = GameObject.FindObjectsOfType<enemyMovement>();
+            for (var i = 0; i < enemies.Length; ++i)
+            {
+                enemies[i].Kill();
+            }
+        }
     }
 
     public void playerToggleTools()
@@ -82,9 +100,17 @@ public class Game : Singleton
 			var numPlantsAlive = FindObjectsOfType<Plant>().Length;
 			if (numPlantsAlive == 0)
 			{
-				CurrentState = State.LevelEnd;
-				GameUI.OnLevelEnd(false);
+                EndLevel(false);
 			}
+
+            if (Time.realtimeSinceStartup - levelStartTimestamp > levelDuration)
+            {
+                EndLevel(true);
+            }
+            else
+            {
+                GameUI.UpdateCountdown(levelDuration - (Time.realtimeSinceStartup - levelStartTimestamp));
+            }
 		}
     }
 
@@ -93,6 +119,7 @@ public class Game : Singleton
 		if (scene.name.Equals(levelScene))
 		{
 			mainSceneLoaded = true;
+            levelStartTimestamp = Time.realtimeSinceStartup;
             player = GameObject.FindObjectOfType<Player>();
             GameUI.onLevelStarted();
         }
