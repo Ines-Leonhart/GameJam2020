@@ -47,6 +47,11 @@ public class Game : Singleton
 		InitialiseLevel();
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
 	void InitialiseLevel()
 	{
 		SceneManager.LoadScene(levelScene);

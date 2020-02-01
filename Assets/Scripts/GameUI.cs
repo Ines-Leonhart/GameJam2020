@@ -8,6 +8,7 @@ public class GameUI : Singleton
     [SerializeField] GameObject levelEnd;
 
     [SerializeField] Button playButton;
+    [SerializeField] Button quitButton;
     [SerializeField] Button toolButton;
     [SerializeField] Button actionButton;
 
@@ -30,6 +31,7 @@ public class GameUI : Singleton
     void Start()
     {
         playButton.onClick.AddListener(() => Game.StartGame());
+        quitButton.onClick.AddListener(() => Game.QuitGame());
         toolButton.onClick.AddListener(() => toggleTools());
         actionButton.onClick.AddListener(() => useTool());
     }
