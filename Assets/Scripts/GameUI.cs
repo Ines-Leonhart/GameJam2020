@@ -15,8 +15,6 @@ public class GameUI : Singleton
 
     [SerializeField] Text levelEndText;
 
-    string tools = "pulverizer";
-
     Game Game
     {
         get
@@ -34,8 +32,35 @@ public class GameUI : Singleton
     void Start()
     {
         playButton.onClick.AddListener(() => Game.StartGame());
-        toolButton.onClick.AddListener(() => toggleTools(ref tools));
-        actionButton.onClick.AddListener(() => useTool(tools));
+        toolButton.onClick.AddListener(() => toggleTools());
+        actionButton.onClick.AddListener(() => useTool());
+    }
+
+    public void onLevelStarted()
+    {
+        UpdateToolButton();
+    }
+
+    void UpdateToolButton()
+    {
+        ColorBlock my_colors = toolButton.colors;
+        if (Game.player.currentTool == Player.Tools.Watercan)
+        {
+            my_colors.normalColor = new Color(0, 0, 255, 255);
+            my_colors.highlightedColor = new Color(0, 0, 255, 255);
+            my_colors.selectedColor = new Color(0, 0, 255, 255);
+            my_colors.pressedColor = new Color(100, 100, 255, 255);
+            toolButton.GetComponentInChildren<Text>().text = "WATERCAN";
+        }
+        else if (Game.player.currentTool == Player.Tools.Pulverizer)
+        {
+            my_colors.normalColor = new Color(255, 0, 0, 255);
+            my_colors.highlightedColor = new Color(255, 0, 0, 255);
+            my_colors.selectedColor = new Color(255, 0, 0, 255);
+            my_colors.pressedColor = new Color(255, 100, 100, 255);
+            toolButton.GetComponentInChildren<Text>().text = "PULVERIZER";
+        }
+        toolButton.colors = my_colors;
     }
 
     void Update()
@@ -50,35 +75,15 @@ public class GameUI : Singleton
         levelEndText.text = win ? "YOU WIN!" : "YOU LOSE!";
     }
 
-    void toggleTools(ref string tool)
+    void toggleTools()
     {
-        ColorBlock my_colors = toolButton.colors;
-        if (tool == "watercan")
-        {
-            my_colors.normalColor = new Color(255, 0, 0, 255);
-            my_colors.highlightedColor = new Color(255, 0, 0, 255);
-            my_colors.selectedColor = new Color(255, 0, 0, 255);
-            my_colors.pressedColor = new Color(255, 100, 100, 255);
-            toolButton.GetComponentInChildren<Text>().text = "WATERCAN";
-            tool = "pulverizer";
-        }
-        else if (tool == "pulverizer")
-        {
-            my_colors.normalColor = new Color(0, 0, 255, 255);
-            my_colors.highlightedColor = new Color(0, 0, 255, 255);
-            my_colors.selectedColor = new Color(0, 0, 255, 255);
-            my_colors.pressedColor = new Color(100, 100, 255, 255);
-            toolButton.GetComponentInChildren<Text>().text = "PULVERIZER";
-            tool = "watercan";
-        }
-        toolButton.colors = my_colors;
-        Debug.Log(tool);
-        Game.playerToggleTools(tool);
+        Game.playerToggleTools();
+        UpdateToolButton();
     }
 
-    void useTool(string tool)
+    void useTool()
     {
-        Game.playerUseTool(tool);
+        Game.playerUseTool();
     }
 
     public void UpdateCountdown(float time)

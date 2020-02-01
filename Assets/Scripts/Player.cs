@@ -9,6 +9,14 @@ public class Player : MonoBehaviour
     Vector3 fingerUpPosition;
     Vector3 fingerDownPosition;
 
+    public enum Tools
+    {
+        Watercan,
+        Pulverizer
+    }
+
+    public Tools currentTool = Tools.Watercan;
+
     public GameObject currentCell { get; set; }
 
     private Rigidbody rb;
@@ -43,6 +51,46 @@ public class Player : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void ToggleMyTools()
+    {
+        if (currentTool == Tools.Watercan)
+        {
+            Debug.Log("Player changed to pulverizer");
+            currentTool = Tools.Pulverizer;
+        }
+        else if (currentTool == Tools.Pulverizer)
+        {
+            Debug.Log("Player changed to watercan");
+            currentTool = Tools.Watercan;
+        }
+    }
+
+    public void UseMyTools()
+    {
+        if (currentTool == Tools.Watercan)
+        {
+            Debug.Log("Player used watercan on cell " + currentCell.GetInstanceID());
+            var plant = currentCell.GetComponent<cellScript>().Plant;
+            Debug.Log(plant);
+            if (plant != null)
+            {
+                Debug.Log("Plant" + plant + " watered");
+                plant.Water();
+            }
+        }
+        else if (currentTool == Tools.Pulverizer)
+        {
+            Debug.Log("Player used pulverizer on cell " + currentCell.GetInstanceID());
+            var plant = currentCell.GetComponent<cellScript>().Plant;
+            Debug.Log(plant);
+            if (plant != null)
+            {
+                Debug.Log("Plant "+plant+" healed");
+                plant.Heal();
+            }
+        }
     }
 
     private void MouseUp()
