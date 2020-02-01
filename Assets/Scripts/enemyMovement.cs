@@ -40,4 +40,14 @@ public class enemyMovement : MonoBehaviour
     {
         Move(xDir, zDir);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        var plant = other.GetComponent<Plant>();
+        if (plant != null)
+        {
+            plant.Attack();
+            Destroy(this.gameObject);
+        }
+    }
 }

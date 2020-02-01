@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class GameUI : Singleton
@@ -8,7 +6,10 @@ public class GameUI : Singleton
     [SerializeField] GameObject frontend;
     [SerializeField] GameObject game;
     [SerializeField] GameObject levelEnd;
+
     [SerializeField] Button playButton;
+
+    [SerializeField] Text levelEndText;
 
     Game Game
     {
@@ -34,5 +35,10 @@ public class GameUI : Singleton
         frontend.SetActive(Game.CurrentState == Game.State.Frontend);
         game.SetActive(Game.CurrentState == Game.State.Play);
         levelEnd.SetActive(Game.CurrentState == Game.State.LevelEnd);
+    }
+
+    public void OnLevelEnd(bool win)
+    {
+        levelEndText.text = win ? "YOU WIN!" : "YOU LOSE!";
     }
 }

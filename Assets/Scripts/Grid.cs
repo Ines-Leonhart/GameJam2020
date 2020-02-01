@@ -9,6 +9,8 @@ public class Grid : MonoBehaviour
     [SerializeField] GameObject enemySpawner;
     [SerializeField] float spawnerOffset;
     [SerializeField] GameObject plantPrefab;
+    [SerializeField] GameObject cellsContainer;
+    [SerializeField] GameObject plantsContainer;
 
     List<List<GameObject>> cells = new List<List<GameObject>>();
 
@@ -22,8 +24,7 @@ public class Grid : MonoBehaviour
             cells.Add(new List<GameObject>());
             for (int j = -rows / 2; j <= rows / 2; ++j)
             {
-                var y = 0;
-                var go = Instantiate(cellPrefab, transform);
+                var go = Instantiate(cellPrefab, cellsContainer.transform);
                 cells[x].Add(go);
 
                 var position = go.transform.position;
@@ -43,7 +44,6 @@ public class Grid : MonoBehaviour
                     var direction = new Vector3(i == -columns / 2 ? 1 : -1, 0, 0);
                     InstantiateSpawner(position, offset, direction);
                 }
-                ++y;
             }
             ++x;
         }
@@ -95,12 +95,12 @@ public class Grid : MonoBehaviour
         foreach (var t in randomPositions)
         {
             var cellGO = cells[t.Item1][t.Item2];
-            var plant = Instantiate(plantPrefab, cellGO.transform);
+            var plant = Instantiate(plantPrefab, plantsContainer.transform);
 
-            var plantSize = plant.GetComponent<MeshRenderer>().bounds.size;
+            // var plantSize = plant.GetComponent<MeshRenderer>().bounds.size;
 
-            var position = plant.transform.position;
-            position.y += (cellSize.y / 2 + plantSize.y / 2);
+            var position = cellGO.transform.position;
+            position.y += cellSize.y / 2; // (cellSize.y / 2 + plantSize.y / 2);
 
             plant.transform.position = position;
         }
