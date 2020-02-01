@@ -439,6 +439,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelScene: LevelScene
   levelDuration: 30
+  playerPrefab: {fileID: 3473166064173672913, guid: aa6d4490a2ecfdd49a77f5950d5a92cd,
+    type: 3}
 --- !u!4 &816180386
 Transform:
   m_ObjectHideFlags: 0

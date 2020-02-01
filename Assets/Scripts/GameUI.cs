@@ -46,7 +46,7 @@ public class GameUI : Singleton
     void UpdateToolButton()
     {
         ColorBlock my_colors = toolButton.colors;
-        if (Game.player.currentTool == Player.Tools.Watercan)
+        if (Game.Player.currentTool == Player.Tools.Watercan)
         {
             my_colors.normalColor = new Color(0, 0, 255, 255);
             my_colors.highlightedColor = new Color(0, 0, 255, 255);
@@ -54,7 +54,7 @@ public class GameUI : Singleton
             my_colors.pressedColor = new Color(100, 100, 255, 255);
             toolButton.GetComponentInChildren<Text>().text = "WATERCAN";
         }
-        else if (Game.player.currentTool == Player.Tools.Pulverizer)
+        else if (Game.Player.currentTool == Player.Tools.Pulverizer)
         {
             my_colors.normalColor = new Color(255, 0, 0, 255);
             my_colors.highlightedColor = new Color(255, 0, 0, 255);

@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] float minDistanceForSwipe;
     [SerializeField] GameObject cellPrefab;
+    [SerializeField] Transform center;
 
     Vector3 fingerUpPosition;
     Vector3 fingerDownPosition;
@@ -25,7 +26,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        currentCell = checkGround(transform.position).gameObject;
+        currentCell = checkGround(center.position).gameObject;
     }
     
     private void Update()
@@ -102,7 +103,6 @@ public class Player : MonoBehaviour
         var horizontalMovementDistance = Mathf.Abs(fingerDownPosition.x - fingerUpPosition.x);
 
         var cellSize = cellPrefab.GetComponent<Renderer>().bounds.size;
-        var myHeight = GetComponent<Renderer>().bounds.size.y;
 
         if (verticalMovementDistance > minDistanceForSwipe || horizontalMovementDistance > minDistanceForSwipe)
         {
@@ -110,7 +110,7 @@ public class Player : MonoBehaviour
             {
                 if (fingerDownPosition.y - fingerUpPosition.y > 0)
                 {
-                    target = checkGround(transform.position + new Vector3(0, 0, -cellSize.z));
+                    target = checkGround(center.position + new Vector3(0, 0, -cellSize.z));
                     if (target != null)
                     { 
                         transform.position = new Vector3(transform.position.x, transform.position.y, target.position.z);
@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    target = checkGround(transform.position + new Vector3(0, 0, cellSize.z));
+                    target = checkGround(center.position + new Vector3(0, 0, cellSize.z));
                     if (target != null)
                     {
                         transform.position = new Vector3(transform.position.x, transform.position.y, target.position.z);
@@ -131,7 +131,7 @@ public class Player : MonoBehaviour
             {
                 if (fingerDownPosition.x - fingerUpPosition.x > 0)
                 {
-                    target = checkGround(transform.position + new Vector3(-cellSize.x, 0, 0));
+                    target = checkGround(center.position + new Vector3(-cellSize.x, 0, 0));
                     if (target != null)
                     {
                         transform.position = new Vector3(target.position.x, transform.position.y, transform.position.z);

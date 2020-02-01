@@ -20,12 +20,26 @@ public class Game : Singleton
 
 	[SerializeField] string levelScene;
     [SerializeField] float levelDuration;
+    [SerializeField] GameObject playerPrefab;
 
     public State CurrentState { get; set; }
 
 	bool mainSceneLoaded;
     float levelStartTimestamp;
-    public Player player { get; set; }
+
+    GameObject player;
+    public Player Player
+    {
+        get
+        {
+            if (player != null)
+            {
+                return player.GetComponent<Player>();
+            }
+
+            return null;
+        }
+    }
 
 	protected override void Awake()
 	{
@@ -79,17 +93,17 @@ public class Game : Singleton
 
     public void playerToggleTools()
     {
-        if(GameObject.Find("Player") != null)
+        if(Player != null)
         {
-            player.ToggleMyTools();
+            Player.ToggleMyTools();
         }
     }
 
     public void playerUseTool()
     {
-        if (GameObject.Find("Player") != null)
+        if (Player != null)
         {
-            player.UseMyTools();
+            Player.UseMyTools();
         }
     }
 
@@ -120,7 +134,7 @@ public class Game : Singleton
 		{
 			mainSceneLoaded = true;
             levelStartTimestamp = Time.realtimeSinceStartup;
-            player = GameObject.FindObjectOfType<Player>();
+            player = Instantiate(playerPrefab);
             GameUI.onLevelStarted();
         }
 	}

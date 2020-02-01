@@ -24,7 +24,7 @@ public class enemySpawner : MonoBehaviour
 
     void Update()
     {
-        if (Singleton.Get<Game>().CurrentState != Game.State.Play)
+        if (Singleton.Get<Game>() != null && Singleton.Get<Game>().CurrentState != Game.State.Play)
         {
             return;
         }
