@@ -10,6 +10,9 @@ public class GameUI : Singleton
     [SerializeField] Button playButton;
     [SerializeField] Button quitButton;
     [SerializeField] Button toolButton;
+    [SerializeField] Image toolImage;
+    [SerializeField] Sprite waterSprite;
+    [SerializeField] Sprite fertilizerSprite;
     [SerializeField] Button actionButton;
 
     [SerializeField] Text countdown;
@@ -45,24 +48,7 @@ public class GameUI : Singleton
 
     void UpdateToolButton()
     {
-        ColorBlock my_colors = toolButton.colors;
-        if (Game.Player.currentTool == Player.Tools.Watercan)
-        {
-            my_colors.normalColor = new Color(0, 0, 255, 255);
-            my_colors.highlightedColor = new Color(0, 0, 255, 255);
-            my_colors.selectedColor = new Color(0, 0, 255, 255);
-            my_colors.pressedColor = new Color(100, 100, 255, 255);
-            toolButton.GetComponentInChildren<Text>().text = "WATERCAN";
-        }
-        else if (Game.Player.currentTool == Player.Tools.Pulverizer)
-        {
-            my_colors.normalColor = new Color(255, 0, 0, 255);
-            my_colors.highlightedColor = new Color(255, 0, 0, 255);
-            my_colors.selectedColor = new Color(255, 0, 0, 255);
-            my_colors.pressedColor = new Color(255, 100, 100, 255);
-            toolButton.GetComponentInChildren<Text>().text = "PULVERIZER";
-        }
-        toolButton.colors = my_colors;
+        toolImage.sprite = Game.Player.currentTool == Player.Tools.Watercan ? waterSprite : fertilizerSprite;
     }
 
     void Update()
