@@ -93,6 +93,6 @@ public class GameUI : Singleton
         var t = System.TimeSpan.FromSeconds(time);
         countdown.text = string.Format("{0:00}:{1:00}", t.Minutes, t.Seconds);
 
-        progressFill.fillAmount = Mathf.Clamp(time / Game.levelDuration, 0, 1);
+        progressFill.fillAmount = Mathf.Clamp(1 - (time / Game.levelDuration), 0, 1);
     }
 }
