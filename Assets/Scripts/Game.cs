@@ -33,6 +33,11 @@ public class Game : Singleton
 	[SerializeField] string levelScene;
     [SerializeField] public float levelDuration;
     [SerializeField] GameObject playerPrefab;
+    [SerializeField] public int minGrid;
+    [SerializeField] public int maxGrid;
+    [SerializeField] public int maxEnemies;
+    [SerializeField] public int minPlants;
+    [SerializeField] public int increase;
 
     public State CurrentState { get; set; }
     public int PlayerLevel { get; private set; }

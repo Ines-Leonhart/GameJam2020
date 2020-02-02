@@ -11,7 +11,7 @@ public class enemySpawner : MonoBehaviour
     float spawnTimestamp;
     float startTimestamp;
     float awaitStart;
-    [SerializeField] int maxEnemies;
+    int maxEnemies;
 
     Grid grid;
 
@@ -30,7 +30,8 @@ public class enemySpawner : MonoBehaviour
         awaitStart = Random.Range(2f, 10f);
         spawnTimestamp = 0;
         startTimestamp = Time.realtimeSinceStartup;
-
+        maxEnemies = Game.maxEnemies+Game.PlayerLevel*Game.increase;
+        Debug.Log("This level max enemies: " + maxEnemies);
         grid = FindObjectOfType<Grid>();
     }
 

@@ -4,8 +4,9 @@ using System.Collections.Generic;
 public class Grid : MonoBehaviour
 {
     [SerializeField] GameObject cellPrefab;
-    [SerializeField] int rows;
-    [SerializeField] int columns;
+    private int rows;
+    private int columns;
+    private int increasing;
     [SerializeField] float minRange;
     [SerializeField] float maxRange;
     [SerializeField] GameObject enemySpawner;
@@ -13,6 +14,7 @@ public class Grid : MonoBehaviour
     [SerializeField] GameObject plantPrefab;
     [SerializeField] GameObject cellsContainer;
     [SerializeField] GameObject plantsContainer;
+    private int maxPlants;
 
     List<List<GameObject>> cells = new List<List<GameObject>>();
 
@@ -26,6 +28,19 @@ public class Grid : MonoBehaviour
 
     void Start()
     {
+        increasing = Game.minGrid + Game.PlayerLevel * 2;
+        rows = increasing;
+        columns = increasing;
+
+        if (rows > Game.maxGrid)
+        {
+            rows = Game.maxGrid;
+        }
+        if (columns > Game.maxGrid)
+        {
+            columns = Game.maxGrid;
+        }
+        Debug.Log("This level grid: " + rows+"x"+columns);
         var size = GetCellSize();
 
         var x = 0;
@@ -87,7 +102,12 @@ public class Grid : MonoBehaviour
     void InstantiatePlants()
     {
         // TODO: use number based on difficulty
-        var numPlantsToInstantiate = Random.Range(2, (rows * columns) / 2);
+        var numPlantsToInstantiate = Mathf.Ceil(increasing/1.2f);
+        if(numPlantsToInstantiate < Game.minPlants)
+        {
+            numPlantsToInstantiate = Game.minPlants;
+        }
+        Debug.Log("Initial plants in this level: " + numPlantsToInstantiate);
 
         List<(int, int)> randomPositions = new List<(int, int)>();
 

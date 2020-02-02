@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -437,6 +437,11 @@ MonoBehaviour:
   levelDuration: 30
   playerPrefab: {fileID: 3473166064173672913, guid: aa6d4490a2ecfdd49a77f5950d5a92cd,
     type: 3}
+  minGrid: 3
+  maxGrid: 9
+  maxEnemies: 3
+  minPlants: 3
+  increase: 2
 --- !u!4 &816180386
 Transform:
   m_ObjectHideFlags: 0

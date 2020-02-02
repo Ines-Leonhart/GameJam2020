@@ -28,6 +28,7 @@ public class Plant : MonoBehaviour
     [SerializeField] GameObject infectionElements;
     [SerializeField] float infectionTime;
     [SerializeField] GameObject cellPrefab;
+    [SerializeField] List<Renderer> Renderers;
 
     private Vector3 cellSize;
     public State CurrentState { get; private set; }
@@ -70,20 +71,14 @@ public class Plant : MonoBehaviour
             infectionElements.SetActive(false);
 
             timeLeft = infectionTime;
-
-            var renderer = GetComponentInChildren<Renderer>();
-            var my_materials = renderer.materials;
-
-            for(int i=0; i<my_materials.Length; i++)
-            {
-                my_materials[i].color = materialDefaultColors[i];
-            }
-            foreach(Tween tween in tweens)
+            foreach (Tween tween in tweens)
             {
                 tween.Kill();
             }
-
-            renderer.materials = my_materials;
+            for (int i = 0; i < Renderers.Count; i++)
+            {
+                Renderers[i].material.color = materialDefaultColors[i];
+            }
         }
     }
 
@@ -98,14 +93,12 @@ public class Plant : MonoBehaviour
         {
             CurrentState = State.Infected;
             infectionElements.SetActive(true);
-            var renderer = GetComponentInChildren<Renderer>();
-            var my_materials = renderer.materials;
-            foreach(Material material in renderer.materials)
+
+            foreach (Renderer renderer in Renderers)
             {
-                materialDefaultColors.Add(material.color);
-                tweens.Add(material.DOColor(Color.red, infectionTime));
+                materialDefaultColors.Add(renderer.material.color);
+                tweens.Add(renderer.material.DOColor(Color.red, infectionTime));
             }
-            renderer.materials = my_materials;
         }
         else if (CurrentState == State.Infected)
         {
@@ -160,7 +153,7 @@ public class Plant : MonoBehaviour
 
     private void Update()
     {
-        if(CurrentState == State.Infected && Game.gameStarted)
+        if(CurrentState == State.Infected && Game.CurrentState == Game.State.Play)
         { 
             timeLeft -= Time.deltaTime;
             if (timeLeft < 0)

@@ -25,7 +25,6 @@ public class Player : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-
         currentCell = checkGround(center.position).gameObject;
     }
     
@@ -73,6 +72,7 @@ public class Player : MonoBehaviour
 
     public void UseMyTools()
     {
+        currentCell = checkGround(center.position).gameObject;
         if (currentTool == Tools.Watercan)
         {
             var plant = currentCell.GetComponent<cellScript>().Plant;
