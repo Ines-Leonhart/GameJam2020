@@ -41,13 +41,13 @@ public class GameUI : Singleton
 
     void Start()
     {
-        playButton.onClick.AddListener(() => { Game.StartGame(); Game.buttonPress.Play(); });
-        quitButton.onClick.AddListener(() => { Game.QuitGame(); Game.buttonPress.Play(); });
-        toolButton.onClick.AddListener(() => { toggleTools(); Game.buttonPress.Play(); });
+        playButton.onClick.AddListener(() => { Game.StartGame(); Game.buttonSound.Play(); });
+        quitButton.onClick.AddListener(() => { Game.QuitGame(); Game.buttonSound.Play(); });
+        toolButton.onClick.AddListener(() => { toggleTools(); Game.buttonSound.Play(); });
         actionButton.onClick.AddListener(() => { useTool(); });
 
-        restartButton.onClick.AddListener(() => { Game.RestartLevel(); Game.buttonPress.Play(); });
-        nextButton.onClick.AddListener(() => { Game.NextLevel(); Game.buttonPress.Play(); });
+        restartButton.onClick.AddListener(() => { Game.RestartLevel(); Game.buttonSound.Play(); });
+        nextButton.onClick.AddListener(() => { Game.NextLevel(); Game.buttonSound.Play(); });
     }
 
     public void onLevelStarted()
