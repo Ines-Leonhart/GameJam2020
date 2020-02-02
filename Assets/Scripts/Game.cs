@@ -41,6 +41,11 @@ public class Game : Singleton
     [SerializeField] GameObject mainCamera;
     [SerializeField] GameObject menuCamera;
 
+    [SerializeField] public AudioSource buttonSound;
+    [SerializeField] public AudioSource pulverizerSound;
+    [SerializeField] public AudioSource waterSound;
+    [SerializeField] public AudioSource plantAttackSound;
+
     public State CurrentState { get; set; }
     public int PlayerLevel { get; private set; }
 
