@@ -97,8 +97,7 @@ public class Player : MonoBehaviour
                 plant.Water();
             }
 
-            var vfx = Instantiate(waterVfxPrefab);
-            vfx.transform.position = vfxLocation.position;
+            var vfx = Instantiate(waterVfxPrefab, vfxLocation);
         }
         else if (currentTool == Tools.Pulverizer)
         {
@@ -109,8 +108,7 @@ public class Player : MonoBehaviour
                 plant.Heal();
             }
 
-            var vfx = Instantiate(pulverizerVfxPrefab);
-            vfx.transform.position = vfxLocation.position;
+            var vfx = Instantiate(pulverizerVfxPrefab, vfxLocation);
         }
     }
 
