@@ -1,8 +1,20 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class Game : Singleton
 {
+#if UNITY_EDITOR
+    [MenuItem("Utils / Reset Progress")]
+    public static void ResetProgress()
+    {
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+    }
+#endif
+
     GameUI GameUI
 	{
 		get
@@ -23,6 +35,7 @@ public class Game : Singleton
     [SerializeField] GameObject playerPrefab;
 
     public State CurrentState { get; set; }
+    public int PlayerLevel { get; private set; }
 
 	bool mainSceneLoaded;
     public bool gameStarted { get; set; }
@@ -48,6 +61,7 @@ public class Game : Singleton
 		GameObject.DontDestroyOnLoad(gameObject);
 		Application.targetFrameRate = 60;
 		base.Awake();
+        LoadProgress();
 	}
 
     void Start()
@@ -92,6 +106,9 @@ public class Game : Singleton
             {
                 enemies[i].Kill();
             }
+
+            ++PlayerLevel;
+            SaveProgress();
         }
     }
 
@@ -174,6 +191,18 @@ public class Game : Singleton
 
     public void NextLevel()
     {
+        mainSceneLoaded = false;
+        StartGame();
+    }
 
+    void LoadProgress()
+    {
+        PlayerLevel = PlayerPrefs.GetInt("PlayerLevel", 0);
+    }
+
+    void SaveProgress()
+    {
+        PlayerPrefs.SetInt("PlayerLevel", PlayerLevel);
+        PlayerPrefs.Save();
     }
 }

@@ -21,6 +21,8 @@ public class GameUI : Singleton
     [SerializeField] Button restartButton;
     [SerializeField] Button nextButton;
 
+    [SerializeField] Text playerLevel;
+
     Game Game
     {
         get
@@ -43,6 +45,7 @@ public class GameUI : Singleton
         actionButton.onClick.AddListener(() => useTool());
 
         restartButton.onClick.AddListener(() => Game.RestartLevel());
+        nextButton.onClick.AddListener(() => Game.NextLevel());
     }
 
     public void onLevelStarted()
@@ -61,6 +64,8 @@ public class GameUI : Singleton
         frontend.SetActive(Game.CurrentState == Game.State.Frontend);
         game.SetActive(Game.CurrentState == Game.State.Play);
         levelEnd.SetActive(Game.CurrentState == Game.State.LevelEnd);
+
+        playerLevel.text = string.Format("Level {0}", Game.PlayerLevel + 1);
     }
 
     public void OnLevelEnd(bool win)
