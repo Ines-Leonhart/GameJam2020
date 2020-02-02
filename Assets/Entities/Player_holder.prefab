@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c759b26e2b0405aa4a60fee90623cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistanceForSwipe: 20
+  minDistanceForSwipe: 100
   cellPrefab: {fileID: 1857940511978724787, guid: ae90b5b79997f43939e66efa8deb4db9,
     type: 3}
   center: {fileID: 3714127577050516536}

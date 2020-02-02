@@ -83,13 +83,11 @@ public class enemySpawner : MonoBehaviour
         if (spawnTimestamp == 0 && Time.realtimeSinceStartup - startTimestamp >= awaitStart 
             && nPlants > 0 && nPlants > nEnemiesInLine && nTotalEnemies < maxEnemies)
         {
-            Debug.Log("nPlants: "+nPlants+" nEnemiesInLine "+nEnemiesInLine);
             Spawn();
         }
         else if (Time.realtimeSinceStartup - spawnTimestamp >= period
            && nPlants > 0 && nPlants > nEnemiesInLine && nTotalEnemies < maxEnemies)
         {
-            Debug.Log("nPlants: " + nPlants + " nEnemiesInLine " + nEnemiesInLine);
             Spawn();
         }
     }
