@@ -38,6 +38,8 @@ public class Game : Singleton
     [SerializeField] public int maxEnemies;
     [SerializeField] public int minPlants;
     [SerializeField] public int increase;
+    [SerializeField] GameObject mainCamera;
+    [SerializeField] GameObject menuCamera;
 
     public State CurrentState { get; set; }
     public int PlayerLevel { get; private set; }
@@ -70,6 +72,8 @@ public class Game : Singleton
     void Start()
     {
         CurrentState = State.Frontend;
+        menuCamera.SetActive(true);
+        mainCamera.SetActive(false);
         InitialiseLevel();
 	}
 
@@ -79,6 +83,8 @@ public class Game : Singleton
         gameStartedDone = false;
 		CurrentState = State.Play;
         levelStartTimestamp = 0;
+        menuCamera.SetActive(false);
+        mainCamera.SetActive(true);
     }
 
     public void QuitGame()
