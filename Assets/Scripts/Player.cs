@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
     [SerializeField] float minDistanceForSwipe;
     [SerializeField] GameObject cellPrefab;
     [SerializeField] Transform center;
+    [SerializeField] float amplitude;
+    [SerializeField] float frequency;
 
     Vector3 fingerUpPosition;
     Vector3 fingerDownPosition;
@@ -17,20 +19,16 @@ public class Player : MonoBehaviour
     }
 
     public Tools currentTool = Tools.Watercan;
-
     public GameObject currentCell { get; set; }
-
-    private Rigidbody rb;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
         currentCell = checkGround(center.position).gameObject;
     }
     
     private void Update()
     {
-        if(Singleton.Get<Game>().CurrentState != Game.State.Play)
+        if(Singleton.Get<Game>() != null && Singleton.Get<Game>().CurrentState != Game.State.Play)
         {
             return;
         }
@@ -43,6 +41,11 @@ public class Player : MonoBehaviour
         {
             MouseUp();
         }
+
+        var tempPos = transform.position;
+        tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI * frequency) * amplitude;
+
+        transform.position = tempPos;
     }
 
     private Transform checkGround(Vector3 position)
@@ -72,7 +75,6 @@ public class Player : MonoBehaviour
 
     public void UseMyTools()
     {
-        currentCell = checkGround(center.position).gameObject;
         if (currentTool == Tools.Watercan)
         {
             var plant = currentCell.GetComponent<cellScript>().Plant;
