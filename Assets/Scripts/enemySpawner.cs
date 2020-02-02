@@ -29,7 +29,7 @@ public class enemySpawner : MonoBehaviour
         period = Random.Range(6f, 10f);
         awaitStart = Random.Range(2f, 10f);
         spawnTimestamp = 0;
-        startTimestamp = Time.realtimeSinceStartup;
+        startTimestamp = 0;
         maxEnemies = Game.maxEnemies+Game.PlayerLevel*Game.increase;
         Debug.Log("This level max enemies: " + maxEnemies);
         grid = FindObjectOfType<Grid>();
@@ -76,7 +76,10 @@ public class enemySpawner : MonoBehaviour
         {
             return;
         }
-
+        if(startTimestamp == 0)
+        {
+            startTimestamp = Time.realtimeSinceStartup;
+        }
         var nPlants = grid.GetNumberPlantsOnLine(transform.position);
         var nEnemiesInLine = getEnemiesInLine();
         var nTotalEnemies = getTotalNumberOfEnemies();
