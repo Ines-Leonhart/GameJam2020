@@ -19,7 +19,7 @@ public class Game : Singleton
 	}
 
 	[SerializeField] string levelScene;
-    [SerializeField] float levelDuration;
+    [SerializeField] public float levelDuration;
     [SerializeField] GameObject playerPrefab;
 
     public State CurrentState { get; set; }
@@ -165,4 +165,15 @@ public class Game : Singleton
             GameUI.onLevelStarted();
         }
 	}
+
+    public void RestartLevel()
+    {
+        mainSceneLoaded = false;
+        StartGame();
+    }
+
+    public void NextLevel()
+    {
+
+    }
 }

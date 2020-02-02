@@ -18,6 +18,8 @@ public class GameUI : Singleton
     [SerializeField] Text countdown;
 
     [SerializeField] Text levelEndText;
+    [SerializeField] Button restartButton;
+    [SerializeField] Button nextButton;
 
     Game Game
     {
@@ -39,11 +41,14 @@ public class GameUI : Singleton
         quitButton.onClick.AddListener(() => Game.QuitGame());
         toolButton.onClick.AddListener(() => toggleTools());
         actionButton.onClick.AddListener(() => useTool());
+
+        restartButton.onClick.AddListener(() => Game.RestartLevel());
     }
 
     public void onLevelStarted()
     {
         UpdateToolButton();
+        UpdateCountdown(Game.levelDuration);
     }
 
     void UpdateToolButton()
@@ -61,6 +66,8 @@ public class GameUI : Singleton
     public void OnLevelEnd(bool win)
     {
         levelEndText.text = win ? "YOU WIN!" : "YOU LOSE!";
+        restartButton.gameObject.SetActive(!win);
+        nextButton.gameObject.SetActive(win);
     }
 
     void toggleTools()
