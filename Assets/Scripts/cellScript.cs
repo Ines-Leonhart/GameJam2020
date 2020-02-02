@@ -18,26 +18,32 @@ public class cellScript : MonoBehaviour
 
     private float period;
     private float spawnTimestamp;
+    private bool timeInitialized;
 
     private void Start()
     {
         seeded = false;
-        period = Random.Range(spawnTimeRange.Item1, spawnTimeRange.Item2);
-        spawnTimestamp = Time.realtimeSinceStartup;
+        timeInitialized = false;
     }
 
     private void Update()
     {
         if (Game.gameStarted && Game.CurrentState == Game.State.Play)
-        {
-            if(Plant != null)
+        { 
+            if (Plant != null)
             {
                 seeded = true;
             }
 
             if (!seeded)
             {
-                if(Time.realtimeSinceStartup - spawnTimestamp >= period)
+                if (!timeInitialized)
+                {
+                    timeInitialized = true;
+                    period = Random.Range(spawnTimeRange.Item1, spawnTimeRange.Item2);
+                    spawnTimestamp = Time.realtimeSinceStartup;
+                }
+                if (Time.realtimeSinceStartup - spawnTimestamp >= period)
                 {
                     var plantObject = Instantiate(plantPrefab);
                     plantObject.transform.position = transform.position;
