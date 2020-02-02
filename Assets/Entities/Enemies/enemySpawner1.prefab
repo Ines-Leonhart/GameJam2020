@@ -48,7 +48,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8407769336967994666}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -95,4 +95,3 @@ MonoBehaviour:
   xDir: 0
   zDir: 1
   enemy1: {fileID: 6383406247404906947, guid: 964edab54cf5ffe4db3210d2a2e26389, type: 3}
-  maxEnemies: 1
