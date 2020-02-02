@@ -39,7 +39,7 @@ public class Plant : MonoBehaviour
 
     void Start()
     {
-        cellSize = cellPrefab.GetComponent<Renderer>().bounds.size;
+        cellSize = cellPrefab.GetComponentInChildren<Renderer>().bounds.size;
         CurrentState = State.Seed;
         seed.SetActive(true);
         grownPlant.SetActive(false);
@@ -79,6 +79,8 @@ public class Plant : MonoBehaviour
             {
                 Renderers[i].material.color = materialDefaultColors[i];
             }
+
+            GetComponentInChildren<Animator>().SetBool("isInfected", false);
         }
     }
 
@@ -99,6 +101,8 @@ public class Plant : MonoBehaviour
                 materialDefaultColors.Add(renderer.material.color);
                 tweens.Add(renderer.material.DOColor(Color.red, infectionTime));
             }
+
+            GetComponentInChildren<Animator>().SetBool("isInfected", true);
         }
         else if (CurrentState == State.Infected)
         {
