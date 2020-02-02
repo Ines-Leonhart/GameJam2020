@@ -25,6 +25,14 @@ public class Player : MonoBehaviour
     public Tools currentTool = Tools.Watercan;
     public GameObject currentCell { get; set; }
 
+    Game Game
+    {
+        get
+        {
+            return Singleton.Get<Game>();
+        }
+    }
+
     private void Start()
     {
         currentCell = checkGround(center.position).gameObject;
@@ -82,6 +90,7 @@ public class Player : MonoBehaviour
     {
         if (currentTool == Tools.Watercan)
         {
+            Game.waterSound.Play();
             var plant = currentCell.GetComponent<cellScript>().Plant;
             if (plant != null)
             {
@@ -93,6 +102,7 @@ public class Player : MonoBehaviour
         }
         else if (currentTool == Tools.Pulverizer)
         {
+            Game.pulverizerSound.Play();
             var plant = currentCell.GetComponent<cellScript>().Plant;
             if (plant != null)
             {

@@ -86,6 +86,7 @@ public class Plant : MonoBehaviour
 
     public void Attack()
     {
+        Game.plantAttack.Play();
         if (CurrentState == State.Seed)
         {
             // TODO: play an animation before destroying
