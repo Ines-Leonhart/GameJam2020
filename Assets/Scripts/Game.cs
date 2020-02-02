@@ -45,6 +45,7 @@ public class Game : Singleton
     [SerializeField] public AudioSource pulverizerSound;
     [SerializeField] public AudioSource waterSound;
     [SerializeField] public AudioSource plantAttackSound;
+    [SerializeField] public AudioSource enemyExplosionSound;
 
     public State CurrentState { get; set; }
     public int PlayerLevel { get; private set; }

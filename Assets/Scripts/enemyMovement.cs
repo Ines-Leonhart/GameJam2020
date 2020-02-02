@@ -11,6 +11,14 @@ public class enemyMovement : MonoBehaviour
     private BoxCollider boxCollider; //BoxCollider of this object
     private Rigidbody rb; //Rigidbody of this object
 
+    Game Game
+    {
+        get
+        {
+            return Singleton.Get<Game>();
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,13 +68,13 @@ public class enemyMovement : MonoBehaviour
 
     public void Kill()
     {
+        Game.enemyExplosionSound.Play();
         // TODO: vfx
         if (vfxPrefab != null)
         {
             var vfx = Instantiate(vfxPrefab);
             vfx.transform.position = transform.position;
         }
-
         Destroy(this.gameObject);
     }
 }
