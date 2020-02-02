@@ -18,7 +18,9 @@ public class GameUI : Singleton
     [SerializeField] Text countdown;
     [SerializeField] Image progressFill;
 
-    [SerializeField] Text levelEndText;
+    [SerializeField] Image levelEndImage;
+    [SerializeField] Sprite WinImage;
+    [SerializeField] Sprite LoseImage;
     [SerializeField] Button restartButton;
     [SerializeField] Button nextButton;
 
@@ -70,7 +72,7 @@ public class GameUI : Singleton
 
     public void OnLevelEnd(bool win)
     {
-        levelEndText.text = win ? "YOU WIN!" : "YOU LOSE!";
+        levelEndImage.sprite = win ? WinImage : LoseImage;
         restartButton.gameObject.SetActive(!win);
         nextButton.gameObject.SetActive(win);
     }

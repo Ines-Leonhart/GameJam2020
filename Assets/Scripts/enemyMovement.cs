@@ -32,14 +32,18 @@ public class enemyMovement : MonoBehaviour
     {
         if(other.gameObject.tag == "gamePlane")
         {
-            Destroy(this.gameObject);
+            GetComponentInChildren<Animator>().SetBool("makeJump", true);
+            Destroy(this.gameObject, 2f);
         }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Move(xDir, zDir);
+        if (!GetComponentInChildren<Animator>().GetBool("makeJump"))
+        {
+            Move(xDir, zDir);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -48,7 +52,9 @@ public class enemyMovement : MonoBehaviour
         if (plant != null)
         {
             plant.Attack();
-            Destroy(this.gameObject);
+
+            GetComponentInChildren<Animator>().SetBool("makeJump", true);
+            Destroy(this.gameObject, 2f);
         }
     }
 
