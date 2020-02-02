@@ -86,7 +86,7 @@ public class Grid : MonoBehaviour
 
     Vector3 GetCellSize()
     {
-        return cellPrefab.GetComponent<Renderer>().bounds.size;
+        return cellPrefab.GetComponentInChildren<Renderer>().bounds.size;
     }
 
     void InstantiateSpawner(Vector3 initialPosition, Vector3 offset, Vector3 direction)

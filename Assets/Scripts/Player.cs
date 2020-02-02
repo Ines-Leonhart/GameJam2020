@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
         var verticalMovementDistance = Mathf.Abs(fingerDownPosition.y - fingerUpPosition.y);
         var horizontalMovementDistance = Mathf.Abs(fingerDownPosition.x - fingerUpPosition.x);
 
-        var cellSize = cellPrefab.GetComponent<Renderer>().bounds.size;
+        var cellSize = cellPrefab.GetComponentInChildren<Renderer>().bounds.size;
 
         if (verticalMovementDistance > minDistanceForSwipe || horizontalMovementDistance > minDistanceForSwipe)
         {
