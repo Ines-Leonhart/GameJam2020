@@ -42,7 +42,6 @@ public class Game : Singleton
     public State CurrentState { get; set; }
     public int PlayerLevel { get; private set; }
 
-	bool mainSceneLoaded;
     public bool gameStarted { get; set; }
     bool gameStartedDone;
     float levelStartTimestamp;
@@ -63,7 +62,6 @@ public class Game : Singleton
 
 	protected override void Awake()
 	{
-		GameObject.DontDestroyOnLoad(gameObject);
 		Application.targetFrameRate = 60;
 		base.Awake();
         LoadProgress();
@@ -71,17 +69,15 @@ public class Game : Singleton
 
     void Start()
     {
-		CurrentState = State.Frontend;
-		SceneManager.sceneLoaded += OnSceneLoaded;
+        CurrentState = State.Frontend;
+        InitialiseLevel();
 	}
 
 	public void StartGame()
 	{
-        mainSceneLoaded = false;
         gameStarted = false;
         gameStartedDone = false;
 		CurrentState = State.Play;
-		InitialiseLevel();
         levelStartTimestamp = 0;
     }
 
@@ -90,11 +86,16 @@ public class Game : Singleton
         Application.Quit();
     }
 
+    void LoadLevel()
+    {
+        SceneManager.LoadScene(levelScene);
+    }
+
 	void InitialiseLevel()
 	{
-		SceneManager.LoadScene(levelScene);
-
-        // TODO: instantiate stuff
+        Destroy(player);
+        player = Instantiate(playerPrefab);
+        GameUI.onLevelStarted();
     }
 
     void EndLevel(bool win)
@@ -135,7 +136,7 @@ public class Game : Singleton
 
     private void Update()
     {
-		if (CurrentState == State.Play && mainSceneLoaded)
+		if (CurrentState == State.Play)
 		{
             var plants = GameObject.FindObjectsOfType<Plant>();
             if (plants != null)
@@ -178,26 +179,16 @@ public class Game : Singleton
 		}
     }
 
-	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-	{
-		if (scene.name.Equals(levelScene))
-		{
-			mainSceneLoaded = true;
-            player = Instantiate(playerPrefab);
-            GameUI.onLevelStarted();
-        }
-	}
-
     public void RestartLevel()
     {
-        mainSceneLoaded = false;
-        StartGame();
+        LoadLevel();
+        InitialiseLevel();
     }
 
     public void NextLevel()
     {
-        mainSceneLoaded = false;
-        StartGame();
+        LoadLevel();
+        InitialiseLevel();
     }
 
     void LoadProgress()

@@ -34,7 +34,6 @@ public class GameUI : Singleton
 
 	protected override void Awake()
 	{
-		GameObject.DontDestroyOnLoad(gameObject);
 		base.Awake();
 	}
 

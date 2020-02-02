@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
 
     Vector3 fingerUpPosition;
     Vector3 fingerDownPosition;
+    bool mouseDown;
 
     public enum Tools
     {
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             fingerDownPosition = Input.mousePosition;
+            mouseDown = true;
         }
         else if (Input.GetMouseButtonUp(0))
         {
@@ -95,6 +97,11 @@ public class Player : MonoBehaviour
 
     private void MouseUp()
     {
+        if (!mouseDown)
+        {
+            return;
+        }
+
         Transform target;
         fingerUpPosition = Input.mousePosition;
 
@@ -148,5 +155,7 @@ public class Player : MonoBehaviour
                 }
             }
         }
+
+        mouseDown = false;
     }
 }
