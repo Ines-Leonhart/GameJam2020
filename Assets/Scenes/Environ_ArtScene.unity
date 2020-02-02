@@ -2984,13 +2984,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 764188099}
-  m_LocalRotation: {x: 0.13731626, y: -0.3018229, z: -0.04396911, w: -0.94239795}
-  m_LocalPosition: {x: -3.9188817, y: 1.3934257, z: -7.385406}
+  m_LocalRotation: {x: -0.06784503, y: 0.31484056, z: 0.02255978, w: 0.94644785}
+  m_LocalPosition: {x: -0.3, y: 1.06, z: -3.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 48.02, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -8.2, y: 36.8, z: -0.001}
 --- !u!1001 &768685117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3533,7 +3533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelScene: Environ_ArtScene
-  levelDuration: 5
+  levelDuration: 30
   playerPrefab: {fileID: 3473166064173672913, guid: aa6d4490a2ecfdd49a77f5950d5a92cd,
     type: 3}
   minGrid: 3

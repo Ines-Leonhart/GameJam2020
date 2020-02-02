@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969247495478370050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.12, z: 0}
+  m_LocalPosition: {x: 0, y: 1.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6222120320844266659}
@@ -54,13 +54,43 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879472381455090117}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3514398101952118335}
   - {fileID: 1359611816354889405}
   m_Father: {fileID: 6222120320844266659}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2413687379691127968
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 160094831780043810}
+  m_Layer: 9
+  m_Name: VfxLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &160094831780043810
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2413687379691127968}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.129, y: 1.355, z: -0.422}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6222120320844266659}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3473166064173672913
 GameObject:
@@ -95,6 +125,7 @@ Transform:
   - {fileID: 1959354849976135615}
   - {fileID: 3168382399474001955}
   - {fileID: 3714127577050516536}
+  - {fileID: 160094831780043810}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -116,6 +147,11 @@ MonoBehaviour:
   center: {fileID: 3714127577050516536}
   amplitude: 0.01
   frequency: 2
+  waterVfxPrefab: {fileID: 5647175362598669670, guid: 0ddfc38b56094fa4d87317dd09dd5ab2,
+    type: 3}
+  pulverizerVfxPrefab: {fileID: 4755805377558428712, guid: 5195b029d8650614389baf7b23e50488,
+    type: 3}
+  vfxLocation: {fileID: 160094831780043810}
   currentTool: 0
 --- !u!136 &2559814618888299874
 CapsuleCollider:
@@ -9672,7 +9708,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 36b693a81e337cd48ba7720aecb9b399,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.49
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 36b693a81e337cd48ba7720aecb9b399,
         type: 3}
@@ -9767,7 +9803,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 7f40de33d47ed4547a01ee95f190f0ae,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.49
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 7f40de33d47ed4547a01ee95f190f0ae,
         type: 3}
