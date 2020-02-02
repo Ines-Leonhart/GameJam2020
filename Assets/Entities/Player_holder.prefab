@@ -114,6 +114,8 @@ MonoBehaviour:
   cellPrefab: {fileID: 1857940511978724787, guid: ae90b5b79997f43939e66efa8deb4db9,
     type: 3}
   center: {fileID: 3714127577050516536}
+  amplitude: 0.01
+  frequency: 2
   currentTool: 0
 --- !u!136 &2559814618888299874
 CapsuleCollider:
