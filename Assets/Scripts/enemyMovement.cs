@@ -33,7 +33,7 @@ public class enemyMovement : MonoBehaviour
         if(other.gameObject.tag == "gamePlane")
         {
             GetComponentInChildren<Animator>().SetBool("makeJump", true);
-            Destroy(this.gameObject, 5f);
+            Destroy(this.gameObject, 2f);
         }
     }
 
@@ -54,7 +54,7 @@ public class enemyMovement : MonoBehaviour
             plant.Attack();
 
             GetComponentInChildren<Animator>().SetBool("makeJump", true);
-            Destroy(this.gameObject, 5f);
+            Destroy(this.gameObject, 2f);
         }
     }
 
