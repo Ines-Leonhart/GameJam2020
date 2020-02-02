@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DG.Tweening;
+using System.Collections.Generic;
 
 public class Plant : MonoBehaviour
 {
@@ -10,6 +11,14 @@ public class Plant : MonoBehaviour
         Infected,
         Dead
         // TODO: add dry and other states maybe
+    }
+
+    Game Game
+    {
+        get
+        {
+            return Singleton.Get<Game>();
+        }
     }
 
     // TODO: add countdown to death
@@ -23,7 +32,9 @@ public class Plant : MonoBehaviour
     private Vector3 cellSize;
     public State CurrentState { get; private set; }
     private float timeLeft;
-    private float TweenTimer;
+    private bool startTween = false;
+    private List<Color> materialDefaultColors;
+    private List<Tween> tweens = new List<Tween>();
 
     void Start()
     {
@@ -33,10 +44,10 @@ public class Plant : MonoBehaviour
         grownPlant.SetActive(false);
         infectionElements.SetActive(false);
         timeLeft = infectionTime;
-        TweenTimer = timeLeft / 2;
         var rotation = transform.rotation;
         rotation.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
         transform.rotation = rotation;
+        materialDefaultColors = new List<Color>();
     }
 
     public void Water()
@@ -59,6 +70,20 @@ public class Plant : MonoBehaviour
             infectionElements.SetActive(false);
 
             timeLeft = infectionTime;
+
+            var renderer = GetComponentInChildren<Renderer>();
+            var my_materials = renderer.materials;
+
+            for(int i=0; i<my_materials.Length; i++)
+            {
+                my_materials[i].color = materialDefaultColors[i];
+            }
+            foreach(Tween tween in tweens)
+            {
+                tween.Kill();
+            }
+
+            renderer.materials = my_materials;
         }
     }
 
@@ -73,7 +98,16 @@ public class Plant : MonoBehaviour
         {
             CurrentState = State.Infected;
             infectionElements.SetActive(true);
-        }else if (CurrentState == State.Infected)
+            var renderer = GetComponentInChildren<Renderer>();
+            var my_materials = renderer.materials;
+            foreach(Material material in renderer.materials)
+            {
+                materialDefaultColors.Add(material.color);
+                tweens.Add(material.DOColor(Color.red, infectionTime));
+            }
+            renderer.materials = my_materials;
+        }
+        else if (CurrentState == State.Infected)
         {
             Destroy(this.gameObject);
         }
@@ -126,10 +160,9 @@ public class Plant : MonoBehaviour
 
     private void Update()
     {
-        if(CurrentState == State.Infected)
-        {
+        if(CurrentState == State.Infected && Game.gameStarted)
+        { 
             timeLeft -= Time.deltaTime;
-            GetComponentInChildren<Renderer>().material.DOColor(Color.red, timeLeft);
             if (timeLeft < 0)
             {
                 InfectOthers();
