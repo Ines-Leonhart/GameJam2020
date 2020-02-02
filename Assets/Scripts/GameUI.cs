@@ -16,6 +16,7 @@ public class GameUI : Singleton
     [SerializeField] Button actionButton;
 
     [SerializeField] Text countdown;
+    [SerializeField] Image progressFill;
 
     [SerializeField] Text levelEndText;
     [SerializeField] Button restartButton;
@@ -90,5 +91,7 @@ public class GameUI : Singleton
     {
         var t = System.TimeSpan.FromSeconds(time);
         countdown.text = string.Format("{0:00}:{1:00}", t.Minutes, t.Seconds);
+
+        progressFill.fillAmount = Mathf.Clamp(time / Game.levelDuration, 0, 1);
     }
 }
