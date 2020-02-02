@@ -38,6 +38,10 @@ public class Game : Singleton
     [SerializeField] public int maxEnemies;
     [SerializeField] public int minPlants;
     [SerializeField] public int increase;
+    [SerializeField] public AudioSource buttonPress;
+    [SerializeField] public AudioSource pulverizerSound;
+    [SerializeField] public AudioSource waterSound;
+    [SerializeField] public AudioSource plantAttack;
 
     public State CurrentState { get; set; }
     public int PlayerLevel { get; private set; }
