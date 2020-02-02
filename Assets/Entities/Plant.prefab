@@ -288,6 +288,8 @@ MonoBehaviour:
   grownPlant: {fileID: 2375366247489176988}
   infectionElements: {fileID: 7143389557167346656}
   infectionTime: 5
+  cellPrefab: {fileID: 1857940511978724787, guid: ae90b5b79997f43939e66efa8deb4db9,
+    type: 3}
 --- !u!135 &5278955700614223880
 SphereCollider:
   m_ObjectHideFlags: 0
