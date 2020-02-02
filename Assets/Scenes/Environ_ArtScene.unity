@@ -3533,7 +3533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelScene: Environ_ArtScene
-  levelDuration: 5
+  levelDuration: 30
   playerPrefab: {fileID: 3473166064173672913, guid: aa6d4490a2ecfdd49a77f5950d5a92cd,
     type: 3}
   minGrid: 3

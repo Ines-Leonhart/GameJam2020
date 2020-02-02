@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
     [SerializeField] Transform center;
     [SerializeField] float amplitude;
     [SerializeField] float frequency;
+    [SerializeField] GameObject waterVfxPrefab;
+    [SerializeField] GameObject pulverizerVfxPrefab;
+    [SerializeField] Transform vfxLocation;
 
     Vector3 fingerUpPosition;
     Vector3 fingerDownPosition;
@@ -84,6 +87,9 @@ public class Player : MonoBehaviour
             {
                 plant.Water();
             }
+
+            var vfx = Instantiate(waterVfxPrefab);
+            vfx.transform.position = vfxLocation.position;
         }
         else if (currentTool == Tools.Pulverizer)
         {
@@ -92,6 +98,9 @@ public class Player : MonoBehaviour
             {
                 plant.Heal();
             }
+
+            var vfx = Instantiate(pulverizerVfxPrefab);
+            vfx.transform.position = vfxLocation.position;
         }
     }
 
