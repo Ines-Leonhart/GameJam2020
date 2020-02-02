@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
                 {
                     target = checkGround(center.position + new Vector3(0, 0, -cellSize.z));
                     if (target != null)
-                    { 
+                    {
                         transform.position = new Vector3(transform.position.x, transform.position.y, target.position.z);
                         currentCell = target.gameObject;
                     }
